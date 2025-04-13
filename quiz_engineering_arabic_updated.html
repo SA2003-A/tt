@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>أي نوع من المهندسين أنت؟</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #000;
+        }
+        .quiz-container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 700px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>أي نوع من المهندسين أنت؟</h1>
+        <form id="quizForm">
+            <div>
+                <p>1. ماذا تفضل؟</p>
+                <label><input type="radio" name="q1" value="معماري"> التصميم والرسم</label><br>
+                <label><input type="radio" name="q1" value="كهربائي"> الإلكترونيات والطاقة</label><br>
+                <label><input type="radio" name="q1" value="برمجيات"> البرمجة والحلول الذكية</label><br>
+                <label><input type="radio" name="q1" value="مدني"> البناء والتخطيط العمراني</label><br>
+            </div>
+            <div>
+                <p>2. ما الذي يشد انتباهك أكثر؟</p>
+                <label><input type="radio" name="q2" value="معماري"> المباني والديكورات</label><br>
+                <label><input type="radio" name="q2" value="كهربائي"> الأجهزة والدوائر الكهربائية</label><br>
+                <label><input type="radio" name="q2" value="برمجيات"> التطبيقات والتقنيات الجديدة</label><br>
+                <label><input type="radio" name="q2" value="مدني"> البنية التحتية والجسور</label><br>
+            </div>
+            <div>
+                <p>3. أي نوع من المشاريع تحب؟</p>
+                <label><input type="radio" name="q3" value="مدني"> تنفيذ مشروع بناء كبير</label><br>
+                <label><input type="radio" name="q3" value="معماري"> تصميم مبنى مبتكر</label><br>
+                <label><input type="radio" name="q3" value="برمجيات"> إنشاء تطبيق يحل مشكلة</label><br>
+                <label><input type="radio" name="q3" value="كهربائي"> تطوير نظام طاقة ذكي</label><br>
+            </div>
+            <div>
+                <p>4. كيف تفضل قضاء وقت فراغك؟</p>
+                <label><input type="radio" name="q4" value="معماري"> قراءة مقالات عن العمارة والتصميم</label><br>
+                <label><input type="radio" name="q4" value="كهربائي"> تجربة إصلاح أجهزة إلكترونية</label><br>
+                <label><input type="radio" name="q4" value="برمجيات"> تعلم لغات برمجة جديدة</label><br>
+                <label><input type="radio" name="q4" value="مدني"> مشاهدة وثائقيات عن مشاريع ضخمة</label><br>
+            </div>
+            <div>
+                <p>5. ما أكثر ما يميزك؟</p>
+                <label><input type="radio" name="q5" value="معماري"> الحس الإبداعي والاهتمام بالتفاصيل</label><br>
+                <label><input type="radio" name="q5" value="كهربائي"> حب التحديات التقنية</label><br>
+                <label><input type="radio" name="q5" value="برمجيات"> التفكير المنطقي والتحليلي</label><br>
+                <label><input type="radio" name="q5" value="مدني"> التنظيم والقدرة على إدارة المشاريع</label><br>
+            </div>
+            <button type="button" onclick="showResult()">عرض النتيجة</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function showResult() {
+            const answers = ['q1', 'q2', 'q3', 'q4', 'q5'];
+            const scores = { معماري: 0, كهربائي: 0, برمجيات: 0, مدني: 0 };
+
+            answers.forEach(q => {
+                const answer = document.querySelector('input[name="' + q + '"]:checked');
+                if (answer) {
+                    scores[answer.value]++;
+                }
+            });
+
+            let result = '';
+            let max = 0;
+
+            for (const key in scores) {
+                if (scores[key] > max) {
+                    max = scores[key];
+                    result = key;
+                }
+            }
+
+            let description = '';
+            switch(result) {
+                case 'معماري':
+                    description = 'أنت تميل للهندسة المعمارية، حيث يجتمع الإبداع مع الفن والتخطيط.';
+                    break;
+                case 'كهربائي':
+                    description = 'أنت تميل للهندسة الكهربائية، حيث تبتكر الحلول وتعشق الإلكترونيات والطاقة.';
+                    break;
+                case 'برمجيات':
+                    description = 'أنت تميل لهندسة البرمجيات، تحب المنطق والبرمجة وبناء الحلول الرقمية.';
+                    break;
+                case 'مدني':
+                    description = 'أنت تميل للهندسة المدنية، تهتم بالبنية التحتية والتخطيط الحضري والبناء.';
+                    break;
+                default:
+                    description = 'يرجى الإجابة على جميع الأسئلة.';
+            }
+
+            document.getElementById('result').innerText = description;
+        }
+    </script>
+</body>
+</html>
